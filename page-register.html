@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>Register</title>
+    <meta name="description" content="Mobilekit HTML Mobile UI Kit">
+    <meta name="keywords" content="bootstrap 5, mobile template, cordova, phonegap, mobile, html" />
+    <link rel="icon" type="image/png" href="./assets/img/SalaMOMLogo.png" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="bg-white">
+
+
+    <!-- App Header -->
+    <div class="appHeader no-border transparent position-absolute">
+        <div class="left">
+            <a  class="headerButton goBack">
+                <ion-icon id="goToPage" name="chevron-back-outline"></ion-icon>
+            </a>
+        </div>
+        <div class="pageTitle"></div>
+    </div>
+    <!-- * App Header -->
+
+    <!-- App Capsule -->
+    <div id="appCapsule">
+
+        <div class="login-form">
+            <div class="section">
+                <h1>Register New User</h1>
+                <h4>Fill the form to create a user</h4>
+            </div>
+            <div class="section mt-2 mb-5">
+                <form>
+
+                    <div class="form-group boxed">
+                        <div class="input-wrapper">
+                            <i class="clear-input">
+                                <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="userName" placeholder="Username">
+                                <button class="btn btn-info py-0" type="button" id="btnGroupDrop1" role="group">
+                                    <span id="setUserID">
+                                        Username
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group boxed">
+                        <div class="input-wrapper">
+                            <div class="input-group">
+                                    <input type="password" class="form-control" id="userPassword" autocomplete="off"
+                                        placeholder="Password">
+                                    <button class="btn btn-info py-0" type="button" id="btnGroupDrop1" role="group">
+                                        <span id="setIcon">
+                                            Password
+                                        </span>
+                                    </button>
+                                </div>
+                            <i class="clear-input">
+                                <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                        </div>
+                    </div>
+                    <div class="form-group boxed">
+                        <div class="input-wrapper">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>
+                                        <div class="input-group">
+                                            <select class="form-control form-select fw-bold" id="userGrade"
+                                                style="text-align: center; color: rgb(0, 47, 134)">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                            </select>
+                                            <button class="btn btn-info py-0" type="button" id="btnGroupDrop1" role="group">
+                                                <span id="setIcon">
+                                                    Grade
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <select class="form-control form-select fw-bold" id="userSex"
+                                                style="text-align: center; color: rgb(0, 47, 134)">
+                                                <option value="M">M</option>
+                                                <option value="F">F</option>
+                                            </select>
+                                            <button class="btn btn-info py-0" type="button" id="btnGroupDrop1" role="group">
+                                                <span id="setIcon">
+                                                    Sex
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="form-group boxed">
+                        <button id="mySub" type="submit" class="btn btn-primary btn-block btn-sm rounded-pill mb-1">Register</button>
+                        <button id="myUpdate" type="submit" class="btn btn-success btn-block btn-sm rounded-pill mb-1">Update</button>
+                        <button id="myDelete" type="submit" class="btn btn-danger btn-block btn-sm rounded-pill mb-1">Delete</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="section">
+            <table id="myUserTable" class="table table-bordered border-dark fw-bold text-center bg-primary"
+                style="color: white;">
+                <tr>
+                    <td>N0</td>
+                    <td>Username</td>
+                    <td>Sex</td>
+                    <td>Grade</td>
+                    <td>Password</td>
+                </tr>
+                <tbody id="showusers" class="bg-info"></tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- * App Capsule -->
+
+
+
+    <!-- ============== Js Files ==============  -->
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-storage-compat.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- Splide -->
+    <script src="assets/js/plugins/splide/splide.min.js"></script>
+    <!-- ProgressBar js -->
+    <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
+    <!-- Base Js File -->
+    <script src="./assets/js/admin.js"></script>
+
+</body>
+
+</html>

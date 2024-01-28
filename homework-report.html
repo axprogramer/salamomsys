@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=0.8, minimum-scale=0.8, maximum-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#000000" />
+  <title>SalaMOM Sys</title>
+
+  <link rel="icon" type="image/png" href="./assets/img/SalaMOMLogo.png" sizes="32x32" />
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="https://firebasestorage.googleapis.com/v0/b/useradmin-cd653.appspot.com/o/StdImages%2FSalaMOM%20Logo.png?alt=media&token=358b995c-7c97-43c8-8159-d1449063268b" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"> </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"> </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"
+    integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"
+    integrity="sha512-dBB2PGgYedA6vzize7rsf//Q6iuUuMPvXCDybHtZP3hQXCPCD/YVJXK3QYZ2v0p7YCfVurqr8IdcSuj4CCKnGg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.js" integrity="sha512-dVlVERqW+tvhXtyR9eeRRtvoMlTrvtrXpokQOxGqiavf5+LaNjgrZ3lcPw7lsqUETwWlyg91lQhcLFejtyrnjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.min.js" integrity="sha512-wMs996/3kB35BNfH8sukLIiOBvLlcvKC/qxkOpblGoIvkTRWJo2gYmNyWUt8B9cdDXVpymTZpbo9/hOHwKFroQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+  <!-- <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="manifest" href="__manifest.json" />
+</head>
+
+<body>
+  <!-- loader -->
+  <!-- <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div> -->
+  <!-- * loader -->
+
+  <!-- App Header -->
+  <div class="appHeader bg-info">
+    <div class="left">
+      <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+        <ion-icon name="menu-outline"></ion-icon>
+      </a>
+    </div>
+    <!-- <div class="pageTitle">Discover Rx2</div> -->
+    <!-- <div class="right">
+        <a href="#" class="headerButton toggle-searchbox">
+          <ion-icon name="search-outline"></ion-icon>
+        </a>
+      </div> -->
+  </div>
+  <!-- * App Header -->
+  <!-- Modal -->
+  <div class="modal fade" id="newStdModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-size: 1.5vh;">Add New Student</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="wide-block pb-2 pt-2">
+            <table class="table table-borderless text-center">
+              <tr>
+                <td>
+                  <table class="table table-borderless">
+                    <tr>
+                      <td>
+                        <div class="form-group boxed">
+                          <div class="input-wrapper">
+                            <label class="form-label fw-bold" for="myID">Student's ID:</label>
+                            <input style="font-size: 1.5vh;" type="text" class="form-control khmerFont" id="myID"
+                              placeholder="Enter your ID" autocomplete="off" />
+                            <i class="clear-input">
+                              <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                  <table class="table table-borderless">
+                    <tr>
+                      <td>
+                        <div class="form-group boxed">
+                          <div class="input-wrapper">
+                            <label class="form-label fw-bold" for="name5">Khmer Name:</label>
+                            <input style="font-size: 1.5vh;" type="text" class="form-control khmerFont" id="myKhname"
+                              placeholder="Enter your Khmer Name" autocomplete="off" />
+                            <i class="clear-input">
+                              <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group basic">
+                          <div class="input-wrapper">
+                            <label class="form-label fw-bold" for="mySex">Gender:</label>
+                            <select style="font-size: 1.5vh;" class="form-control form-select" id="mySex"
+                              style="text-align: center">
+                              <option value="M">M</option>
+                              <option value="F">F</option>
+                            </select>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="form-group boxed">
+                          <div class="input-wrapper">
+                            <label class="form-label fw-bold" for="name5">English Name:</label>
+                            <input style="font-size: 1.5vh;" type="text" class="form-control" id="myEnname"
+                              placeholder="Enter your English Name" autocomplete="off" />
+                            <i class="clear-input">
+                              <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td>
+                  <p id="showPercent" style="color: rgb(41, 70, 0);font-weight: bold;"></p>
+                  <button id="seleImg" style="
+                      background-color: transparent;
+                      border: none;
+                      color: aliceblue;
+                    ">
+                    <img class="imaged rounded" src="./assets/img/sample/4x6sample.png" id="showImgUpload"
+                      style="height: 15vh" />
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td style="display: none">
+                  <input type="text" id="nameBox" />
+                  <p id="extlab"></p>
+                </td>
+              </tr>
+              <tr>
+                <td style="display: none">
+                  <input type="text" id="showURL" style="display: none" />
+                  <button id="uploadBtn">Upload</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+        <!-- Button add/update/delete -->
+        <div class="modal-footer">
+          <button type="button" id="addBtn" class="btn btn-success rounded shadowed btn-sm me-1 mb-1">
+            <ion-icon name="add-circle-outline"></ion-icon> Add
+          </button>
+          <button type="button" id="updateBtn" class="btn btn-warning rounded shadowed btn-sm me-1 mb-1">
+            <ion-icon name="cloud-upload-outline"></ion-icon> Update
+          </button>
+          <button type="button" id="deleteBtn" class="btn btn-danger rounded shadowed btn-sm me-1 mb-1">
+            <ion-icon name="trash-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal import Data -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <ion-icon name="chevron-back-outline" data-bs-dismiss="modal"></ion-icon>
+          <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Import Student</h1>
+          <h1></h1>
+        </div>
+        <div class="modal-body">
+          <div>
+            <form enctype="multipart/form-data">
+              <a href="https://firebasestorage.googleapis.com/v0/b/teachingrecord-6b575.appspot.com/o/import%2Fsample%20import%20data.xlsx?alt=media&token=f0a8a4e3-d209-473f-84d0-9d69037fa4e8"
+                target="_blank" rel="noopener noreferrer" style="color: rgb(255, 47, 47);">Click here
+                to download Sample</a>
+              <div class="mb-3">
+                <label for="formFile" class="form-label">Please choose file Excel</label>
+                <input class="form-control" type="file" id="upload" name="files[]">
+              </div>
+            </form>
+            <table class="table table-bordered whiteBack table-hover kh" style="font-size: 12px;">
+              <thead style="background-color: blanchedalmond;font-weight: bold;">
+                <tr>
+                  <th scope="col"> # </th>
+                  <th scope="col"> ID </th>
+                  <th scope="col"> English Name </th>
+                  <th scope="col"> Khmer Name </th>
+                  <th scope="col"> Sex</th>
+                  <th scope="col"> Grade </th>
+                </tr>
+              </thead>
+              <tbody id="showTable" style="color: black;">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btnRows" type="button" class="btn btn-success rounded shadowed btn-sm me-1 mb-1"><ion-icon
+              name="cloud-download-outline"></ion-icon> Import Students</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Search Component -->
+  <div id="search" class="appHeader">
+    <form class="search-form">
+      <div class="form-group searchbox">
+        <input type="text" class="form-control" placeholder="Search..." />
+        <i class="input-icon">
+          <ion-icon name="search-outline"></ion-icon>
+        </i>
+        <a href="#" class="ms-1 close toggle-searchbox">
+          <ion-icon name="close-circle"></ion-icon>
+        </a>
+      </div>
+    </form>
+  </div>
+  <!-- * Search Component -->
+
+  <!-- App Capsule -->
+  <div id="appCapsule">
+    <div class="header-large-title text-center">
+      <h1 class="title">Student's Record Homework</h1>
+    </div>
+
+    <div class="section mt-3 mb-3">
+      <div class="card" style="overflow-x:auto; padding: 15px;">
+        <table>
+          <tr class="fw-bold" style="vertical-align: middle">
+            <td class="text-center">Student Grade:</td>
+            <td class="text-center">
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <select class="form-control form-select fw-bold" id="myGrade" style="text-align: center; color: blue">
+                    <option value="1A">1A</option>
+                    <option value="1B">1B</option>
+                    <option value="2A">2A</option>
+                    <option value="2B">2B</option>
+                    <option value="3A">3A</option>
+                    <option value="3B">3B</option>
+                    <option value="4A">4A</option>
+                    <option value="4B">4B</option>
+                    <option value="5A">5A</option>
+                    <option value="5B">5B</option>
+                    <option value="6A">6A</option>
+                    <option value="6B">6B</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <select class="form-control form-select fw-bold" id="myMonth" style="text-align: center; color: blue">
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April-May">April-May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+
+            <td class="text-center">
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <select class="form-control form-select fw-bold" id="academicYear"
+                    style="text-align: center; color: blue">
+                    <option value="2022-2023">2022-2023</option>
+                    <option value="2023-2024">2023-2024</option>
+                    <option value="2024-2025">2024-2025</option>
+                    <option value="2025-2026">2025-2026</option>
+                    <option value="2026-2027">2026-2027</option>
+                    <option value="2027-2028">2027-2028</option>
+                    <option value="2028-2029">2028-2029</option>
+                    <option value="2029-2030">2029-2030</option>
+                    <option value="2030-2031">2030-2031</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <select class="form-control form-select fw-bold" id="divided"
+                    style="text-align: center; color: blue">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+
+          </tr>
+        </table>
+        <!-- <table class="tale table-borderless">
+          <tr>
+            <td class="text-end">
+              <button data-bs-toggle="modal" data-bs-target="#newStdModal" type="button" id="newBtn"
+                class="btn btn-success rounded shadowed btn-sm me-1 mb-1">
+                <ion-icon name="person-add-outline"></ion-icon> Add
+              </button>
+            </td>
+            <td class="text-start">
+              <button data-bs-toggle="modal" data-bs-target="#importModal" type="button" id="importStd"
+                class="btn btn-warning rounded shadowed btn-sm me-1 mb-1">
+                <ion-icon name="cloud-download-outline"></ion-icon> Import
+              </button>
+            </td>
+            <td class="text-start">
+              <button type="button" id="saveData" class="btn btn-info rounded shadowed btn-sm me-1 mb-1">
+                <ion-icon name="save-outline"></ion-icon> Save
+              </button>
+            </td>
+            <td class="text-start">
+              <button type="button" id="PrintDoc" class="btn btn-info rounded shadowed btn-sm me-1 mb-1">
+                <ion-icon name="print-outline"></ion-icon> Print
+              </button>
+            </td>
+          </tr>
+        </table> -->
+
+      </div>
+    </div>
+    <div class="section mt-3 mb-3">
+      <div class="card" style="overflow-x:auto; height: 35rem; padding: 15px;" id="TestPDF">
+        <table id="Test" class="table table-responsive table-striped table-hover table-bordered border-dark">
+          <thead class="text-center align-middle table-info border-dark">
+            <tr>
+              <td class="border-dark fw-bold">N0</td>
+              <td class="border-dark fw-bold">Khmer Name</td>
+              <td class="border-dark fw-bold">Sex</td>
+              <td class="border-dark fw-bold">1</td>
+              <td class="border-dark fw-bold">2</td>
+              <td class="border-dark fw-bold">3</td>
+              <td class="border-dark fw-bold">4</td>
+              <td class="border-dark fw-bold">5</td>
+              <td class="border-dark fw-bold">6</td>
+              <td class="border-dark fw-bold">7</td>
+              <td class="border-dark fw-bold">8</td>
+              <td class="border-dark fw-bold">9</td>
+              <td class="border-dark fw-bold">10</td>
+              <td class="border-dark fw-bold">11</td>
+              <td class="border-dark fw-bold">12</td>
+              <td class="border-dark fw-bold">13</td>
+              <td class="border-dark fw-bold">14</td>
+              <td class="border-dark fw-bold">15</td>
+              <td class="border-dark fw-bold">16</td>
+              <td class="border-dark fw-bold">17</td>
+              <td class="border-dark fw-bold">18</td>
+              <td class="border-dark fw-bold">19</td>
+              <td class="border-dark fw-bold">20</td>
+              <td class="border-dark fw-bold">Average</td>
+            </tr>
+          <tbody id="showInput5a" class="table-bordered border-dark">
+
+          </tbody>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <div class="section mt-3 mb-3" style="display: none;">
+      <div class="card" style="overflow-x:auto; padding: 15px;">
+        <div id="TestView">
+          <table id="saveDataExcel" class="table table-responsive table-striped table-hover table-bordered border-dark">
+            <thead class="text-center align-middle table-info border-dark">
+              <tr>
+                <td class="border-dark fw-bold">N0</td>
+                <td class="border-dark fw-bold">English Name</td>
+                <td class="border-dark fw-bold">Khmer Name</td>
+                <td class="border-dark fw-bold">Gender</td>
+                <td class="border-dark fw-bold">Grade</td>
+              </tr>
+            <tbody id="showView" class="table-bordered border-dark">
+
+            </tbody>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- app footer -->
+    <div class="appFooter">
+      <img
+        src="./assets/img/SalaMOMLogo.png"
+        alt="icon" class="footer-logo mb-2" />
+      <div class="footer-title">
+        Copyright © SalaMOM <span class="yearNow"></span>. All Rights
+        Reserved.
+      </div>
+
+      <div class="mt-2">
+        <a href="#" class="btn btn-icon btn-sm btn-secondary goTop">
+          <ion-icon name="arrow-up-outline"></ion-icon>
+        </a>
+      </div>
+    </div>
+    <!-- * app footer -->
+  </div>
+  <!-- * App Capsule -->
+
+  <!-- App Bottom Menu -->
+  <div class="appBottomMenu">
+    <a href="new-student.html" class="item">
+      <div class="col">
+        <ion-icon name="home-outline"></ion-icon>
+      </div>
+    </a>
+    <a href="#" class="item">
+      <div class="col">
+        <ion-icon name="duplicate-outline"></ion-icon>
+      </div>
+    </a>
+    <a href="input-student-score.html" class="item ">
+      <div class="col">
+        <ion-icon name="podium-outline"></ion-icon>
+      </div>
+    </a>
+    <a href="preview-std-score.html" class="item">
+      <div class="col">
+        <ion-icon name="eye-outline"></ion-icon>
+      </div>
+    </a>
+    <a href="#" class="item">
+      <div class="col">
+        <ion-icon name="accessibility-outline"></ion-icon>
+      </div>
+    </a>
+    <a href="homework-report.html" class="item active">
+      <div class="col">
+        <ion-icon name="briefcase-outline"></ion-icon>
+      </div>
+    </a>
+
+    <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
+      <div class="col">
+        <ion-icon name="menu-outline"></ion-icon>
+      </div>
+    </a>
+  </div>
+  <!-- * App Bottom Menu -->
+
+  <!-- App Sidebar -->
+  <div class="offcanvas offcanvas-start fw-bold" tabindex="-1" id="sidebarPanel">
+    <div class="offcanvas-body">
+      <!-- profile box -->
+      <div class="profileBox bg-info">
+        <div class="image-wrapper">
+          <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="imaged rounded" />
+        </div>
+        <div class="in">
+          <strong id="setUsername">Julian Gruber</strong>
+          <div class="text-muted">
+            <ion-icon name="location"></ion-icon>
+            Primary Teacher
+          </div>
+        </div>
+        <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
+          <ion-icon name="close"></ion-icon>
+        </a>
+      </div>
+      <!-- * profile box -->
+
+      <ul class="listview flush transparent no-line image-listview mt-2">
+        <li>
+          <a href="new-student.html" class="item">
+            <div class="icon-box bg-primary">
+              <ion-icon name="home-outline"></ion-icon>
+            </div>
+            <div class="in">New Student</div>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="item">
+            <div class="icon-box bg-primary">
+              <ion-icon name="duplicate-outline"></ion-icon>
+            </div>
+            <div class="in">Tools</div>
+          </a>
+        </li>
+        <li>
+          <a href="input-student-score.html" class="item">
+            <div class="icon-box bg-primary">
+              <ion-icon name="podium-outline"></ion-icon>
+            </div>
+            <div class="in">Score Reports</div>
+          </a>
+        </li>
+        <li>
+          <a href="preview-std-score.html" class="item">
+            <div class="icon-box bg-primary">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <div class="in">
+              <div>Score Preview</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="item">
+            <div class="icon-box bg-primary">
+              <ion-icon name="accessibility-outline"></ion-icon>
+            </div>
+            <div class="in">
+              <div>Sport Report</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="homework-report.html" class="item">
+            <div class="icon-box bg-primary">
+              <ion-icon name="briefcase-outline"></ion-icon>
+            </div>
+            <div class="in">
+              <div>Homework Report</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="item">
+            <div class="icon-box bg-primary">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+            <div class="in">
+              <div>Resource Books</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="item">
+            <div class="icon-box bg-primary">
+              <ion-icon name="musical-notes-outline"></ion-icon>
+            </div>
+            <div class="in">
+              <div>Audio Books</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <div class="item">
+            <!-- <div class="icon-box bg-primary">
+                <ion-icon name="moon-outline"></ion-icon>
+              </div> -->
+            <!-- <div class="in">
+                <div>Dark Mode</div>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input dark-mode-switch"
+                    type="checkbox"
+                    id="darkmodesidebar"
+                  />
+                  <label class="form-check-label" for="darkmodesidebar"></label>
+                </div>
+              </div> -->
+          </div>
+        </li>
+      </ul>
+
+      <!-- <div class="listview-title mt-2 mb-1">
+          <span>Friends</span>
+        </div> -->
+      <!-- <ul class="listview image-listview flush transparent no-line">
+          <li>
+            <a href="page-chat.html" class="item">
+              <img
+                src="assets/img/sample/avatar/avatar7.jpg"
+                alt="image"
+                class="image"
+              />
+              <div class="in">
+                <div>Sophie Asveld</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="page-chat.html" class="item">
+              <img
+                src="assets/img/sample/avatar/avatar3.jpg"
+                alt="image"
+                class="image"
+              />
+              <div class="in">
+                <div>Sebastian Bennett</div>
+                <span class="badge badge-danger">6</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="page-chat.html" class="item">
+              <img
+                src="assets/img/sample/avatar/avatar10.jpg"
+                alt="image"
+                class="image"
+              />
+              <div class="in">
+                <div>Beth Murphy</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="page-chat.html" class="item">
+              <img
+                src="assets/img/sample/avatar/avatar2.jpg"
+                alt="image"
+                class="image"
+              />
+              <div class="in">
+                <div>Amelia Cabal</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="page-chat.html" class="item">
+              <img
+                src="assets/img/sample/avatar/avatar5.jpg"
+                alt="image"
+                class="image"
+              />
+              <div class="in">
+                <div>Henry Doe</div>
+              </div>
+            </a>
+          </li>
+        </ul> -->
+    </div>
+    <!-- sidebar buttons -->
+    <div class="sidebar-buttons">
+      <!-- <a href="#" class="button">
+          <ion-icon name="person-outline"></ion-icon>
+        </a>
+        <a href="#" class="button">
+          <ion-icon name="archive-outline"></ion-icon>
+        </a> -->
+      <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#DialogForm">
+        <ion-icon name="settings-outline"></ion-icon>
+      </a>
+      <a href="#" class="button" id="btnLogout">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </a>
+    </div>
+    <!-- * sidebar buttons -->
+  </div>
+  <!-- * App Sidebar -->
+<!-- Dialog Form -->
+<div class="modal fade dialogbox" id="DialogForm" data-bs-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form>
+        <div class="modal-body text-start mb-2">
+          <div class="form-group basic">
+            <div class="input-wrapper">
+              <label class="form-label" for="secretPass">Secret Words</label>
+              <input type="text" class="form-control" id="secretPass" placeholder="Enter secret words">
+              <i class="clear-input">
+                <ion-icon name="close-circle"></ion-icon>
+              </i>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <div class="btn-inline">
+            <button type="button" class="btn btn-text-secondary" data-bs-dismiss="modal">CLOSE</button>
+            <button type="button" class="btn btn-text-primary" data-bs-dismiss="modal" id="adminLogin">SIGN
+              IN</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ============== Js Files ==============  -->
+
+  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-storage-compat.js"></script>
+
+
+  <!-- Bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="assets/js/lib/bootstrap.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <!-- Splide -->
+  <script src="assets/js/plugins/splide/splide.min.js"></script>
+  <!-- ProgressBar js -->
+  <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
+  <script src="./assets/js/homework-score.js"></script>
+  <!-- Base Js File -->
+  <!-- <script src="assets/js/base.js"></script> -->
+</body>
+
+</html>
